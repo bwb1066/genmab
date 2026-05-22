@@ -37,7 +37,14 @@
   --heading-font-size-xs: 22px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 120px;
+  --util-nav-height: 36px;
+
+  /* genmab brand */
+  --genmab-primary: #0c736d;
+  --genmab-secondary: #34e3b5;
+  --genmab-purple: #691a6c;
+  --genmab-yellow: #ffbd00;
 }
 
 /* fallback fonts */
@@ -51,6 +58,12 @@
   font-family: roboto-fallback;
   size-adjust: 99.529%;
   src: local('Arial');
+}
+
+@media (width >= 900px) {
+  header {
+    height: auto;
+  }
 }
 
 @media (width >= 900px) {
