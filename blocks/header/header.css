@@ -75,7 +75,7 @@ header nav[aria-expanded='true'] {
   }
 
   header .nav-wrapper-scrolled .nav-search svg {
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   header .nav-wrapper-scrolled .nav-sections .nav-drop[aria-expanded='true'] > .nav-megamenu {
@@ -328,7 +328,7 @@ header nav .nav-sections ul {
 
   header nav[aria-expanded='true'] .nav-sections .nav-drop[aria-expanded='true'] > .nav-megamenu {
     display: block;
-    padding: 0 0 12px 0;
+    padding: 0 0 12px;
   }
 
   header nav[aria-expanded='true'] .nav-megamenu-featured,
@@ -342,6 +342,7 @@ header nav .nav-sections ul {
     padding: 0;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav[aria-expanded='true'] .nav-megamenu-links li {
     padding: 8px 0;
     font-size: 15px;
@@ -362,10 +363,12 @@ header nav .nav-sections ul {
     padding: 0;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .nav-mobile-util-list li {
     border-bottom: 1px solid #e8e8e8;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .nav-mobile-util-list li a:any-link {
     display: block;
     padding: 18px 0;
@@ -392,10 +395,12 @@ header nav .nav-sections ul {
     padding: 0;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .nav-mobile-region-list li {
     border-bottom: 1px solid #e8e8e8;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .nav-mobile-region-list li a:any-link {
     display: block;
     padding: 18px 0;
@@ -406,10 +411,6 @@ header nav .nav-sections ul {
     text-decoration: none;
   }
 
-  /* Hide mobile extras on desktop */
-  header .nav-mobile-extras {
-    display: none;
-  }
 }
 
 @media (width >= 900px) {
@@ -422,6 +423,7 @@ header nav .nav-sections ul {
     display: block;
     visibility: visible;
     white-space: nowrap;
+    align-self: stretch;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
@@ -457,11 +459,6 @@ header nav .nav-sections ul {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-
-  /* Make nav-sections and its list fill full nav height */
-  header nav .nav-sections {
-    align-self: stretch;
   }
 
   header nav .nav-sections .default-content-wrapper {
@@ -616,6 +613,7 @@ header nav .nav-sections ul {
     object-fit: cover;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   header .nav-megamenu-featured .default-content-wrapper {
     position: relative;
     z-index: 1;
@@ -706,7 +704,35 @@ header nav .nav-tools .nav-search svg {
   display: block;
   width: 20px;
   height: 20px;
-  fill: currentColor;
+  fill: currentcolor;
+}
+
+header nav .nav-tools .nav-concierge {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: 0;
+  padding: 4px;
+  color: inherit;
+  cursor: pointer;
+}
+
+@keyframes concierge-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+header nav .nav-tools .nav-concierge svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  animation: concierge-shimmer 3s ease-in-out infinite;
+  transition: filter 0.2s ease;
+}
+
+header nav .nav-tools .nav-concierge:hover svg {
+  animation: none;
+  filter: drop-shadow(0 0 5px currentcolor);
 }
 
 /* util nav bar — hidden on mobile */
@@ -859,10 +885,7 @@ header .nav-util .nav-util-dropdown ul li a:hover {
 /* ── Mobile sub-menu panel ─────────────────────────────────────── */
 .nav-mobile-subpanel {
   position: fixed;
-  top: var(--nav-height);
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: var(--nav-height) 0 0 0;
   background: white;
   z-index: 200;
   overflow-y: auto;
@@ -940,6 +963,7 @@ header .nav-util .nav-util-dropdown ul li a:hover {
   border-bottom: 1px solid #e8e8e8;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .nav-mobile-panel-links li a:any-link {
   display: block;
   padding: 16px 0;
@@ -953,6 +977,7 @@ header .nav-util .nav-util-dropdown ul li a:hover {
   margin-top: 32px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .nav-mobile-panel-featured img {
   display: block;
   width: 100%;

@@ -77,7 +77,7 @@ function buildTeamCarousel(people) {
     const items = getItems();
     const cardPct = 100 / total;
     const offset = current * cardPct;
-    track.style.width = `${total * 100 / items}%`;
+    track.style.width = `${(total * 100) / items}%`;
     cards.forEach((c) => { c.style.flexBasis = `${100 / total}%`; c.style.flexShrink = '0'; });
     track.style.transform = `translateX(-${offset * items}%)`;
     counter.textContent = `${current + 1} of ${total}`;
@@ -109,7 +109,9 @@ function decorateTeamHero(block) {
   const hr = cell.querySelector('hr');
 
   const allH2s = [...cell.querySelectorAll('h2')];
+  // eslint-disable-next-line no-bitwise
   const bodyEl = allH2s.find((h) => !h.closest('table') && h.compareDocumentPosition(hr) & Node.DOCUMENT_POSITION_FOLLOWING);
+  // eslint-disable-next-line no-bitwise
   const sectionTitleEl = allH2s.find((h) => !h.closest('table') && h.compareDocumentPosition(hr) & Node.DOCUMENT_POSITION_PRECEDING);
 
   const table = cell.querySelector('table');
@@ -120,7 +122,11 @@ function decorateTeamHero(block) {
       const picture = imgCell?.querySelector('picture');
       const name = contentCell?.querySelector('h2')?.textContent.trim();
       const linkEl = contentCell?.querySelector('a');
-      if (name) people.push({ picture, name, href: linkEl?.href, linkText: linkEl?.textContent.trim() });
+      if (name) {
+        people.push({
+          picture, name, href: linkEl?.href, linkText: linkEl?.textContent.trim(),
+        });
+      }
     });
   }
 

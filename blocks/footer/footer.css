@@ -12,6 +12,8 @@ footer {
   max-width: 1312px;
   margin: 0 auto;
   padding: 40px 24px 32px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Mobile layout: logo → tagline → nav → social ───────────────── */
@@ -52,11 +54,6 @@ footer {
 .footer-social {
   order: 4;
   margin-bottom: 0;
-}
-
-.footer-inner {
-  display: flex;
-  flex-direction: column;
 }
 
 .footer-nav-col {

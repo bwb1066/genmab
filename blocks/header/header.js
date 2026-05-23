@@ -383,6 +383,48 @@ export default async function decorate(block) {
   navTools.className = 'nav-tools';
   navTools.innerHTML = '<button type="button" class="nav-search" aria-label="Search"><svg aria-hidden="true" focusable="false" viewBox="0 0 520 520" fill="currentColor" width="20" height="20"><path d="M496 453L362 320a189 189 0 10-340-92 190 190 0 00298 135l133 133a14 14 0 0021 0l21-21a17 17 0 001-22M210 338a129 129 0 11130-130 129 129 0 01-130 130"/></svg></button>';
 
+  // Brand AI Concierge button — reads credentials from page metadata
+  const conciergeUrl = getMetadata('concierge-url');
+  const conciergeKey = getMetadata('concierge-key');
+  const conciergeSite = getMetadata('concierge-site');
+
+  if (conciergeUrl && conciergeKey && conciergeSite) {
+    const conciergeBtn = document.createElement('button');
+    conciergeBtn.type = 'button';
+    conciergeBtn.className = 'nav-concierge';
+    conciergeBtn.setAttribute('aria-label', 'Ask the AI Concierge');
+    conciergeBtn.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"'
+      + ' width="20" height="20" fill="none" stroke="currentColor"'
+      + ' stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+      + '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962'
+      + 'L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0'
+      + 'L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964'
+      + 'L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>'
+      + '<path d="M20 3v4"/><path d="M22 5h-4"/>'
+      + '<path d="M4 17v2"/><path d="M5 18H3"/></svg>';
+
+    const WIDGET_URL = 'https://bwb1066.github.io/brand-chat-config-ui/widget/brand-concierge.js';
+    const WIDGET_BASE = WIDGET_URL.replace(/[^/]+$/, '');
+    let chatModule = null;
+
+    conciergeBtn.addEventListener('click', async () => {
+      if (!chatModule) {
+        // eslint-disable-next-line import/no-unresolved
+        chatModule = await import(WIDGET_URL);
+        chatModule.init({
+          supabaseUrl: conciergeUrl,
+          anonKey: conciergeKey,
+          siteKey: conciergeSite,
+          showTrigger: false,
+          widgetBase: WIDGET_BASE,
+        });
+      }
+      chatModule.default();
+    });
+
+    navTools.prepend(conciergeBtn);
+  }
+
   // Mobile-only: util links + regional sites appended below nav sections
   const mobileExtras = document.createElement('div');
   mobileExtras.className = 'nav-mobile-extras';

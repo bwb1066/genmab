@@ -52,9 +52,9 @@ export default function decorate(block) {
           node = node.nextElementSibling;
         }
         stats.push(stat);
-        continue;
+      } else {
+        node = node.nextElementSibling;
       }
-      node = node.nextElementSibling;
     }
   }
 
