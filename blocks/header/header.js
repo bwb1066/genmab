@@ -59,13 +59,86 @@ function toggleAllNavSections(sections, expanded = false) {
   });
 }
 
+function closeMobileSubpanel() {
+  const panel = document.querySelector('.nav-mobile-subpanel');
+  if (!panel) return;
+  panel.classList.remove('nav-mobile-subpanel-open');
+  panel.addEventListener('transitionend', () => panel.remove(), { once: true });
+}
+
+function openMobileSubpanel(megamenu, labelText) {
+  closeMobileSubpanel();
+
+  const panel = document.createElement('div');
+  panel.className = 'nav-mobile-subpanel';
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'nav-mobile-back';
+  back.innerHTML = '&#8249; Back';
+  back.addEventListener('click', closeMobileSubpanel);
+  panel.append(back);
+
+  const body = document.createElement('div');
+  body.className = 'nav-mobile-panel-body';
+
+  const descEl = megamenu.querySelector('.nav-megamenu-description');
+  if (descEl?.textContent.trim()) {
+    const desc = document.createElement('p');
+    desc.className = 'nav-mobile-panel-description';
+    desc.textContent = descEl.textContent.trim();
+    body.append(desc);
+  }
+
+  const ctaEl = megamenu.querySelector('.nav-megamenu-cta');
+  if (ctaEl) {
+    const cta = document.createElement('a');
+    cta.href = ctaEl.href;
+    cta.className = 'nav-mobile-panel-cta';
+    cta.textContent = ctaEl.textContent.trim() || labelText;
+    body.append(cta);
+  }
+
+  const linksEl = megamenu.querySelector('.nav-megamenu-links');
+  if (linksEl) {
+    const ul = document.createElement('ul');
+    ul.className = 'nav-mobile-panel-links';
+    linksEl.querySelectorAll('a').forEach((a) => {
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = a.href;
+      link.textContent = a.textContent.trim();
+      li.append(link);
+      ul.append(li);
+    });
+    body.append(ul);
+  }
+
+  panel.append(body);
+
+  const featuredEl = megamenu.querySelector('.nav-megamenu-featured');
+  if (featuredEl) {
+    const featWrap = document.createElement('div');
+    featWrap.className = 'nav-mobile-panel-featured';
+    const picture = featuredEl.querySelector('picture');
+    if (picture) featWrap.append(picture.cloneNode(true));
+    panel.append(featWrap);
+  }
+
+  document.body.append(panel);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    panel.classList.add('nav-mobile-subpanel-open');
+  }));
+}
+
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  toggleAllNavSections(navSections, 'false');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  if (expanded) closeMobileSubpanel();
   if (!expanded || isDesktop.matches) {
     window.addEventListener('keydown', closeOnEscape);
     nav.addEventListener('focusout', closeOnFocusLost);
@@ -227,19 +300,23 @@ function decorateNavSections(navSections) {
     navSection.classList.add('nav-drop');
     navSection.append(btn, megamenu);
 
-    // Desktop: hover opens/closes megamenu
-    // Both navSection and megamenu get listeners because the megamenu is
-    // position:fixed and leaves the navSection's bounding box.
+    // Desktop: hover opens/closes megamenu.
+    // A close delay lets the mouse travel from the nav item to the fixed
+    // megamenu panel without the panel disappearing in transit.
+    let closeTimer;
     const openSection = () => {
       if (!isDesktop.matches) return;
+      clearTimeout(closeTimer);
       toggleAllNavSections(navSections);
       navSection.setAttribute('aria-expanded', 'true');
       btn.setAttribute('aria-expanded', 'true');
     };
     const closeSection = () => {
       if (!isDesktop.matches) return;
-      navSection.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-expanded', 'false');
+      closeTimer = setTimeout(() => {
+        navSection.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-expanded', 'false');
+      }, 150);
     };
 
     navSection.addEventListener('mouseenter', openSection);
@@ -247,12 +324,10 @@ function decorateNavSections(navSections) {
     megamenu.addEventListener('mouseenter', openSection);
     megamenu.addEventListener('mouseleave', closeSection);
 
-    // Mobile: click button to toggle
+    // Mobile: click button to open full-screen sub-panel
     btn.addEventListener('click', () => {
       if (isDesktop.matches) return;
-      const expanded = navSection.getAttribute('aria-expanded') === 'true';
-      navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      openMobileSubpanel(megamenu, labelText);
     });
 
     // Load featured fragment async
@@ -308,10 +383,48 @@ export default async function decorate(block) {
   navTools.className = 'nav-tools';
   navTools.innerHTML = '<button type="button" class="nav-search" aria-label="Search"><svg aria-hidden="true" focusable="false" viewBox="0 0 520 520" fill="currentColor" width="20" height="20"><path d="M496 453L362 320a189 189 0 10-340-92 190 190 0 00298 135l133 133a14 14 0 0021 0l21-21a17 17 0 001-22M210 338a129 129 0 11130-130 129 129 0 01-130 130"/></svg></button>';
 
-  // Rebuild nav: hamburger | brand | sections | tools
+  // Mobile-only: util links + regional sites appended below nav sections
+  const mobileExtras = document.createElement('div');
+  mobileExtras.className = 'nav-mobile-extras';
+
+  const utilLinks = utilSection?.querySelector('ul');
+  if (utilLinks) {
+    const hr = document.createElement('hr');
+    hr.className = 'nav-mobile-divider';
+    mobileExtras.append(hr);
+    const ul = utilLinks.cloneNode(true);
+    ul.className = 'nav-mobile-util-list';
+    mobileExtras.append(ul);
+  }
+
+  const regionHr = document.createElement('hr');
+  regionHr.className = 'nav-mobile-divider';
+  mobileExtras.append(regionHr);
+
+  const regionHeading = document.createElement('p');
+  regionHeading.className = 'nav-mobile-region-heading';
+  regionHeading.textContent = 'Genmab Regional Sites';
+  mobileExtras.append(regionHeading);
+
+  const regionList = document.createElement('ul');
+  regionList.className = 'nav-mobile-region-list';
+  REGIONAL_SITES.forEach(({ label, href }) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = href;
+    a.textContent = label;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    li.append(a);
+    regionList.append(li);
+  });
+  mobileExtras.append(regionList);
+
+  // Rebuild nav: brand | sections | tools | hamburger (mobile grid order via CSS)
   nav.innerHTML = '';
   nav.append(hamburger, navBrand);
   if (sectionsSection) nav.append(sectionsSection);
+  nav.append(mobileExtras);
   nav.append(navTools);
   nav.setAttribute('aria-expanded', 'false');
   toggleMenu(nav, navSections, isDesktop.matches);
@@ -324,7 +437,16 @@ export default async function decorate(block) {
   navWrapper.append(utilBar, nav);
   block.append(navWrapper);
 
-  const onScroll = () => navWrapper.classList.toggle('nav-wrapper-scrolled', window.scrollY > 0);
+  let navScrolled = false;
+  const onScroll = () => {
+    if (!navScrolled && window.scrollY > 80) {
+      navScrolled = true;
+      navWrapper.classList.add('nav-wrapper-scrolled');
+    } else if (navScrolled && window.scrollY === 0) {
+      navScrolled = false;
+      navWrapper.classList.remove('nav-wrapper-scrolled');
+    }
+  };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }

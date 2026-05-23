@@ -1,32 +1,31 @@
-main > .section-promo-container {
+main > .about-us-hero-container {
   margin: 0;
   padding: 0;
   background-color: var(--genmab-primary);
 }
 
-.section-promo-container .section-promo-wrapper {
+.about-us-hero-container .about-us-hero-wrapper {
   max-width: unset;
   padding: 0;
 }
 
-.section-promo {
+.about-us-hero {
   padding: 40px 24px;
 }
 
-.section-promo-inner {
+.about-us-hero-inner {
   display: flex;
   flex-direction: column;
   max-width: 1312px;
   margin: 0 auto;
 }
 
-.section-promo-content {
+.about-us-hero-content {
   flex: 1 1 0;
   min-width: 0;
-  color: white;
 }
 
-.section-promo-tag {
+.about-us-hero-tag {
   margin: 0 0 20px;
   font-size: 11px;
   font-weight: 700;
@@ -36,30 +35,32 @@ main > .section-promo-container {
   line-height: 1;
 }
 
-.section-promo-title {
+.about-us-hero-title {
   margin: 0 0 24px;
   font-family: meta-comp-pro-light, sans-serif;
-  font-weight: 350;
+  font-weight: 400;
   font-size: 36px;
   line-height: 44px;
   color: white;
 }
 
-.section-promo-body {
+.about-us-hero-body {
   margin: 0 0 32px;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 400;
   font-size: 18px;
   line-height: 28px;
   color: white;
 }
 
-.section-promo-ctas {
+.about-us-hero-ctas {
   display: flex;
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
 }
 
-.section-promo-cta-primary:any-link {
+.about-us-hero-cta-primary:any-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -77,12 +78,11 @@ main > .section-promo-container {
   text-decoration: none;
 }
 
-.section-promo-cta-primary:hover {
+.about-us-hero-cta-primary:hover {
   background-color: white;
-  color: #000;
 }
 
-.section-promo-cta-secondary:any-link {
+.about-us-hero-cta-secondary:any-link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -92,7 +92,7 @@ main > .section-promo-container {
   text-decoration: none;
 }
 
-.section-promo-cta-secondary::after {
+.about-us-hero-cta-secondary::after {
   content: '›';
   display: inline-flex;
   align-items: center;
@@ -106,21 +106,21 @@ main > .section-promo-container {
   flex-shrink: 0;
 }
 
-.section-promo-cta-secondary:hover {
+.about-us-hero-cta-secondary:hover {
   text-decoration: underline;
 }
 
-.section-promo-image {
+.about-us-hero-image {
   flex: 0 0 auto;
   margin-top: 32px;
   width: 100%;
 }
 
-.section-promo-image picture {
+.about-us-hero-image picture {
   display: block;
 }
 
-.section-promo-image img {
+.about-us-hero-image img {
   display: block;
   width: 100%;
   height: auto;
@@ -128,35 +128,39 @@ main > .section-promo-container {
 }
 
 @media (width >= 900px) {
-  .section-promo {
+  .about-us-hero {
     padding: 64px 32px;
   }
 
-  .section-promo-inner {
+  .about-us-hero-inner {
     flex-direction: row;
     align-items: center;
-    gap: 80px;
+    justify-content: space-between;
+    gap: 64px;
   }
 
-  .section-promo-title {
-    font-size: 44px;
-    line-height: 52px;
+  .about-us-hero-title {
+    font-size: 48px;
+    line-height: 56px;
+    max-width: 420px;
   }
 
-  .section-promo-body {
+  .about-us-hero-body {
+    font-size: 24px;
+    line-height: 32px;
     max-width: 520px;
   }
 
-  .section-promo-cta-primary:any-link {
+  .about-us-hero-cta-primary:any-link {
     width: auto;
     padding: 12px 28px;
   }
 
-  .section-promo-ctas {
+  .about-us-hero-ctas {
     gap: 32px;
   }
 
-  .section-promo-image {
+  .about-us-hero-image {
     flex: 0 0 300px;
     margin-top: 0;
     width: auto;

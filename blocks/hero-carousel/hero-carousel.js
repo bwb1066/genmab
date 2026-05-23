@@ -72,12 +72,14 @@ export default function decorate(block) {
   const prevBtn = document.createElement('button');
   prevBtn.type = 'button';
   prevBtn.className = 'hero-carousel-prev';
-  prevBtn.innerHTML = '&lsaquo; Previous';
+  prevBtn.innerHTML = '&#8249;';
+  prevBtn.setAttribute('aria-label', 'Previous slide');
 
   const nextBtn = document.createElement('button');
   nextBtn.type = 'button';
   nextBtn.className = 'hero-carousel-next';
-  nextBtn.innerHTML = 'Next &rsaquo;';
+  nextBtn.innerHTML = '&#8250;';
+  nextBtn.setAttribute('aria-label', 'Next slide');
 
   const navButtons = document.createElement('div');
   navButtons.className = 'hero-carousel-buttons';

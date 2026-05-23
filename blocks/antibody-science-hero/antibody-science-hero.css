@@ -1,0 +1,253 @@
+main > .antibody-science-hero-container {
+  margin: 0;
+  padding: 0;
+}
+
+.antibody-science-hero-container .antibody-science-hero-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.antibody-science-hero-inner {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.antibody-science-hero-header {
+  margin-bottom: 40px;
+}
+
+.antibody-science-hero-tag {
+  margin: 0 0 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--genmab-primary);
+  line-height: 1;
+}
+
+.antibody-science-hero-title {
+  margin: 0;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 44px;
+  color: #1a1a1a;
+}
+
+/* Body: stacked on mobile */
+.antibody-science-hero-body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.antibody-science-hero-image {
+  width: 100%;
+}
+
+.antibody-science-hero-image picture {
+  display: block;
+}
+
+.antibody-science-hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.antibody-science-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.antibody-science-hero-desc {
+  margin: 0;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 350;
+  font-size: 18px;
+  line-height: 28px;
+  color: #000;
+}
+
+.antibody-science-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--genmab-secondary);
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 0;
+  width: 100%;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.antibody-science-hero-cta:hover,
+.antibody-science-hero-cta:focus-visible {
+  background-color: #000;
+  color: #fff;
+}
+
+.antibody-science-hero-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.antibody-science-hero-stat {
+  border-top: 1px solid rgb(0 0 0 / 15%);
+  padding: 24px 0;
+}
+
+/* Mobile: label then number stacked */
+.antibody-science-hero-stat-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.antibody-science-hero-stat-left {
+  min-width: 0;
+}
+
+.antibody-science-hero-stat-label {
+  margin: 0 0 4px;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 350;
+  font-size: 18px;
+  line-height: 26px;
+  color: rgb(0 0 0 / 80%);
+}
+
+.antibody-science-hero-stat-footnote {
+  margin: 8px 0;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 350;
+  font-size: 11px;
+  line-height: 16px;
+  color: rgb(0 0 0 / 60%);
+}
+
+.antibody-science-hero-stat-link:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 350;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--genmab-primary);
+  text-decoration: none;
+}
+
+.antibody-science-hero-stat-link::after {
+  content: '›';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--genmab-primary);
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.antibody-science-hero-stat-link:hover {
+  text-decoration: underline;
+}
+
+.antibody-science-hero-stat-number {
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 1;
+  color: #000;
+}
+
+@media (width >= 900px) {
+  .antibody-science-hero-inner {
+    padding: 80px 32px;
+  }
+
+  .antibody-science-hero-header {
+    margin-bottom: 64px;
+  }
+
+  .antibody-science-hero-title {
+    font-size: 52px;
+    line-height: 60px;
+  }
+
+  .antibody-science-hero-body {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 120px;
+  }
+
+  .antibody-science-hero-image {
+    flex: 0 0 44%;
+    width: auto;
+  }
+
+  .antibody-science-hero-image picture {
+    height: 100%;
+  }
+
+  .antibody-science-hero-image img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .antibody-science-hero-content {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: space-between;
+  }
+
+  .antibody-science-hero-desc {
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0 0 32px;
+  }
+
+  .antibody-science-hero-cta {
+    width: fit-content;
+    padding: 12px 28px;
+    margin-bottom: 48px;
+  }
+
+  .antibody-science-hero-stat-main {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .antibody-science-hero-stat-left {
+    flex: 1 1 0;
+  }
+
+  .antibody-science-hero-stat-label {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .antibody-science-hero-stat-number {
+    font-size: 40px;
+    line-height: 48px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+}

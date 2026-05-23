@@ -7,6 +7,7 @@ main > .hero-container {
   padding: 0;
 }
 
+/* Logo/image hero variant */
 .hero {
   background-color: var(--genmab-primary);
   color: white;
@@ -23,8 +24,9 @@ main > .hero-container {
   box-sizing: border-box;
 }
 
+/* Logo hidden on mobile — it lives in the nav bar too */
 .hero-logo {
-  flex: 0 0 42%;
+  display: none;
 }
 
 .hero-logo img {
@@ -37,10 +39,10 @@ main > .hero-container {
 .hero h1 {
   flex: 1;
   margin: 0;
-  font-size: 72px;
+  font-size: 40px;
   font-family: meta-comp-pro-light, sans-serif;
   font-weight: 350;
-  line-height: 80px;
+  line-height: 48px;
   color: white;
 }
 
@@ -51,5 +53,202 @@ main > .hero-container {
 
   .hero-inner {
     padding: 0;
+  }
+
+  .hero-logo {
+    display: block;
+    flex: 0 0 42%;
+  }
+
+  .hero h1 {
+    font-size: 72px;
+    line-height: 80px;
+  }
+}
+
+/* Team hero variant */
+.hero.hero-team {
+  background-color: #691a6c;
+  color: white;
+  padding: 0;
+}
+
+.hero-team-inner {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.hero-team-header {
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.hero-team-tag {
+  margin: 0 0 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: white;
+  line-height: 1;
+}
+
+.hero-team-title {
+  margin: 0 0 16px;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 44px;
+  color: white;
+}
+
+.hero-team-body {
+  margin: 0;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: rgb(255 255 255 / 85%);
+}
+
+.hero-team-divider {
+  border: none;
+  border-top: 1px solid rgb(255 255 255 / 30%);
+  margin: 0 0 40px;
+}
+
+.hero-team-section-title {
+  margin: 0 0 32px;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  color: white;
+}
+
+/* Carousel */
+.hero-team-track-wrap {
+  overflow: hidden;
+}
+
+.hero-team-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.hero-team-card {
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+.hero-team-card-image {
+  margin-bottom: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.hero-team-card-image picture {
+  display: block;
+  height: 100%;
+}
+
+.hero-team-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.hero-team-card-name {
+  margin: 0 0 8px;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 28px;
+  color: white;
+}
+
+.hero-team-card-link:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: meta-comp-pro-light, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  text-decoration: underline;
+}
+
+.hero-team-card-link::after {
+  content: '›';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+/* Nav bar */
+.hero-team-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  border-top: 1px solid rgb(255 255 255 / 30%);
+  padding-top: 14px;
+}
+
+.hero-team-counter {
+  font-family: meta-comp-pro-light, sans-serif;
+  font-size: 14px;
+  color: white;
+  opacity: 0.85;
+}
+
+.hero-team-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.hero-team-prev,
+.hero-team-next {
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.85;
+}
+
+.hero-team-prev:hover,
+.hero-team-next:hover {
+  opacity: 1;
+}
+
+.hero-team-prev:disabled,
+.hero-team-next:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (width >= 900px) {
+  .hero-team-inner {
+    padding: 64px 32px;
+  }
+
+  .hero-team-title {
+    font-size: 52px;
+    line-height: 60px;
   }
 }

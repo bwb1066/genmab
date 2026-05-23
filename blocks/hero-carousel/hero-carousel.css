@@ -42,6 +42,7 @@ main > .hero-carousel-container {
   height: auto;
   aspect-ratio: 2064 / 855;
   object-fit: cover;
+  object-position: center top;
 }
 
 /* Content overlay */
@@ -115,18 +116,20 @@ main > .hero-carousel-container {
 /* Nav bar */
 .hero-carousel-nav {
   max-width: 1312px;
-  margin: 75px auto 0;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.hero-carousel-nav-inner {
-  width: 50%;
+  margin: 20px auto 0;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid rgb(255 255 255 / 30%);
-  padding: 14px 0;
+  padding-top: 14px;
+}
+
+.hero-carousel-nav-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: white;
   font-family: meta-comp-pro-light, sans-serif;
   font-weight: 400;
@@ -140,7 +143,7 @@ main > .hero-carousel-container {
 
 .hero-carousel-buttons {
   display: flex;
-  gap: 24px;
+  gap: 16px;
 }
 
 .hero-carousel-prev,
@@ -148,19 +151,62 @@ main > .hero-carousel-container {
   background: none;
   border: 0;
   color: white;
-  font: inherit;
+  font-size: 24px;
+  line-height: 1;
   cursor: pointer;
   padding: 0;
-  text-decoration: underline;
+  opacity: 0.85;
+  text-decoration: none;
 }
 
 .hero-carousel-prev:hover,
 .hero-carousel-next:hover {
-  opacity: 0.75;
+  opacity: 1;
+}
+
+@media (width < 900px) {
+  .hero-carousel-slide img {
+    aspect-ratio: unset;
+    height: 60vh;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero-carousel-content {
+    max-width: 100%;
+    background: linear-gradient(to top, rgb(0 0 0 / 70%) 40%, transparent 80%);
+    justify-content: flex-end;
+  }
+
+  .hero-carousel-title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .hero-carousel-body {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .hero-carousel-nav {
+    padding: 0 24px;
+    padding-top: 14px;
+    margin-top: 16px;
+  }
 }
 
 @media (width >= 900px) {
   .hero-carousel {
     padding: 0 32px;
+  }
+
+  .hero-carousel-nav {
+    padding: 0 32px;
+    padding-top: 14px;
+    justify-content: flex-end;
+  }
+
+  .hero-carousel-nav-inner {
+    width: 50%;
   }
 }

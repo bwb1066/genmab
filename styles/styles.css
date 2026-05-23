@@ -37,7 +37,7 @@
   --heading-font-size-xs: 22px;
 
   /* nav height */
-  --nav-height: 120px;
+  --nav-height: 72px;
   --util-nav-height: 36px;
 
   /* genmab brand */
@@ -99,6 +99,12 @@ body.appear {
 
 header {
   height: var(--nav-height);
+}
+
+@media (width >= 900px) {
+  header {
+    height: calc(var(--nav-height) + var(--util-nav-height));
+  }
 }
 
 header .header,
