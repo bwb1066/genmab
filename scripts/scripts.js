@@ -211,8 +211,14 @@ export async function loadPage() {
 }
 
 loadPage();
-(async function loadDa() {
-  if (!new URL(window.location.href).searchParams.get('dapreview')) return;
-  // eslint-disable-next-line import/no-unresolved
-  import('https://da.live/scripts/dapreview.js').then(({ default: daPreview }) => daPreview(loadPage));
+(function da() {
+  const { searchParams } = new URL(window.location.href);
+  if (searchParams.has('dapreview')) {
+    // eslint-disable-next-line import/no-unresolved
+    import('https://da.live/scripts/dapreview.js').then(({ default: daPreview }) => daPreview(loadPage));
+  }
+  if (searchParams.has('quick-edit')) {
+    // eslint-disable-next-line import/no-cycle
+    import('../tools/quick-edit/quick-edit.js').then(({ default: initQuickEdit }) => initQuickEdit());
+  }
 }());
