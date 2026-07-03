@@ -403,7 +403,7 @@ export default async function decorate(block) {
       + '<path d="M20 3v4"/><path d="M22 5h-4"/>'
       + '<path d="M4 17v2"/><path d="M5 18H3"/></svg>';
 
-    const WIDGET_URL = 'https://bwb1066.github.io/brand-chat-config-ui/widget/brand-concierge.js';
+    const WIDGET_URL = 'https://bwb1066.github.io/brand-concierge/widget/brand-concierge.js';
     const WIDGET_BASE = WIDGET_URL.replace(/[^/]+$/, '');
     let chatModule = null;
 
